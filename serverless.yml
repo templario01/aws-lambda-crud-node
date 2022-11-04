@@ -25,6 +25,12 @@ functions:
       - httpApi:
           path: /tasks
           method: post
+  getTasks:
+    handler: src/get-tasks.getTasks
+    events:
+      - httpApi:
+          path: /tasks
+          method: get
 
 resources:
   Resources:
