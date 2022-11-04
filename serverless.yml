@@ -37,6 +37,18 @@ functions:
       - httpApi:
           path: /tasks/{id}
           method: get
+  updateTask:
+    handler: src/update-task.updateTask
+    events:
+      - httpApi:
+          path: /tasks/{id}
+          method: put
+  deleteTask:
+    handler: src/delete-task.deleteTask
+    events:
+      - httpApi:
+          path: /tasks/{id}
+          method: delete
 
 resources:
   Resources:
@@ -51,4 +63,3 @@ resources:
         KeySchema:
           - AttributeName: id
             KeyType: HASH
-      

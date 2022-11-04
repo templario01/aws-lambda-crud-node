@@ -1,23 +1,25 @@
 const AWS = require("aws-sdk");
 
-const getTask = async (event) => {
+const deleteTask = async (event) => {
   try {
     const dynamodb = new AWS.DynamoDB.DocumentClient();
     const { id } = event.pathParameters;
 
     const result = await dynamodb
-      .get({
+      .delete({
         TableName: "TaskTable",
         Key: {
           id,
         },
       })
       .promise();
-    const task = result.Item;
 
     return {
       statusCode: 200,
-      body: JSON.stringify({ task }),
+      body: JSON.stringify({
+        message: "Task deleted",
+        data: result.$response.data,
+      }),
     };
   } catch (error) {
     console.error(error);
@@ -30,5 +32,5 @@ const getTask = async (event) => {
 };
 
 module.exports = {
-  getTask,
+  deleteTask,
 };
